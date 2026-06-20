@@ -8,7 +8,8 @@ import Redis from 'ioredis';
 
 // Initialize Redis Client
 // By default, ioredis connects to localhost:6379, which perfectly matches our Docker setup!
-const redis = new Redis();
+// If REDIS_URL is provided (like on Render), it will connect to that instance instead.
+const redis = process.env.REDIS_URL ? new Redis(process.env.REDIS_URL) : new Redis();
 
 // --- PRODUCTION CHECKS ---
 const connectionString = process.env.DATABASE_URL;
