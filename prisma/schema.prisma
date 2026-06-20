@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Think of this Model as an interface in TypeScript, but for your database!
+model Link {
+  // We use an auto-incrementing integer ID because it is FAST and we need it for Base62 encoding later
+  id          Int      @id @default(autoincrement())
+  
+  // The actual short ID (e.g. "xY7z")
+  shortId     String   @unique
+  
+  // The long URL to redirect to
+  originalUrl String
+  
+  // Automatically track when links are created
+  createdAt   DateTime @default(now())
+
+  // One-to-Many relation: A link can have many clicks
+  clicks      Click[]
+}
+
+model Click {
+  id        Int      @id @default(autoincrement())
+  
+  // We relate the click directly to the short ID
+  shortId   String
+  link      Link     @relation(fields: [shortId], references: [shortId])
+  
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+}
