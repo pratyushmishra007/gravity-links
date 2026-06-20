@@ -24,6 +24,7 @@ const prisma = new PrismaClient({ adapter });
 
 // 1. Create an Express application instance
 const app = express();
+app.set('trust proxy', 1); // Trust first proxy (Render) to get real client IPs
 
 // 2. Define the port our server will listen on (Dynamic for deployment)
 const PORT = process.env.PORT || 3000;
@@ -190,10 +191,14 @@ app.get('/stats/:id', async (req: Request, res: Response): Promise<void> => {
         return;
     }
 
+    // Calculate unique clicks based on distinct IPs
+    const uniqueIps = new Set(link.clicks.map(click => click.ip));
+
     res.json({
         originalUrl: link.originalUrl,
         shortId: link.shortId,
         totalClicks: link.clicks.length,
+        uniqueClicks: uniqueIps.size,
         clicks: link.clicks
     });
 });

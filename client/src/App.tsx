@@ -150,6 +150,10 @@ function App() {
                     <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#60a5fa' }}>{stats.totalClicks}</div>
                     <div style={{ fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Clicks</div>
                   </div>
+                  <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '0.75rem', flex: 1, textAlign: 'center' }}>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#10b981' }}>{stats.uniqueClicks || 0}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>Unique Visitors</div>
+                  </div>
                 </div>
 
                 <h4 style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#94a3b8' }}>Recent Activity</h4>
