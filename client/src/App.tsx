@@ -27,7 +27,7 @@ function App() {
   };
 
   // We point to our local server for now
-  const API_URL = 'http://pratyushURLshortner:3000';
+  const API_URL = 'https://gravity-api-ez1s.onrender.com';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
