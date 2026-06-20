@@ -27,6 +27,7 @@ const app = express();
 
 // 2. Define the port our server will listen on (Dynamic for deployment)
 const PORT = process.env.PORT || 3000;
+const BASE_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // 3. Middleware
 app.use(cors()); // Allows frontend websites to talk to our API
@@ -96,7 +97,7 @@ app.post('/shorten', rateLimiter, async (req: Request, res: Response): Promise<v
     if (existingLink) {
         res.status(200).json({
             message: 'URL already shortened',
-            shortUrl: `http://localhost:${PORT}/${existingLink.shortId}`,
+            shortUrl: `${BASE_URL}/${existingLink.shortId}`,
         });
         return;
     }
@@ -121,7 +122,7 @@ app.post('/shorten', rateLimiter, async (req: Request, res: Response): Promise<v
 
     res.status(201).json({
         message: 'URL shortened successfully',
-        shortUrl: `http://localhost:${PORT}/${finalShortId}`,
+        shortUrl: `${BASE_URL}/${finalShortId}`,
     });
 });
 

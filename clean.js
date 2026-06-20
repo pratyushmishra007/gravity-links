@@ -1,0 +1,1 @@
+const { PrismaClient } = require('@prisma/client'); const prisma = new PrismaClient(); async function main() { await prisma.click.deleteMany(); await prisma.link.deleteMany(); console.log('Cleaned'); } main().then(() => process.exit(0));
