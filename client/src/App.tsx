@@ -27,13 +27,13 @@ function App() {
   };
 
   // We point to our local server for now
-  const API_URL = 'http://localhost:3000';
+  const API_URL = 'http://pratyushURLshortner:3000';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setShortUrl('');
-    
+
     if (!originalUrl) {
       setError('Please enter a valid URL');
       return;
@@ -44,7 +44,7 @@ function App() {
       const response = await axios.post(`${API_URL}/shorten`, {
         originalUrl
       });
-      
+
       setShortUrl(response.data.shortUrl);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Something went wrong. Please try again.');
@@ -77,8 +77,8 @@ function App() {
             className="input-field"
             required
           />
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="primary-button"
             disabled={isLoading}
           >
@@ -109,7 +109,7 @@ function App() {
               <Check size={20} />
               URL Shortened Successfully!
             </div>
-            
+
             <a href={shortUrl} target="_blank" rel="noopener noreferrer" className="short-url-link">
               {shortUrl}
             </a>
@@ -123,10 +123,10 @@ function App() {
                 {copied ? <Check size={16} /> : <Copy size={16} />}
                 {copied ? 'Copied!' : 'Copy Link'}
               </button>
-              <a 
-                href={shortUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={shortUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="secondary-button"
                 style={{ textDecoration: 'none' }}
               >
@@ -142,7 +142,7 @@ function App() {
             {stats && (
               <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid var(--glass-border)' }}>
                 <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem' }}>
-                  <BarChart size={18} color="#10b981" /> 
+                  <BarChart size={18} color="#10b981" />
                   Real-Time Analytics
                 </h3>
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
@@ -151,7 +151,7 @@ function App() {
                     <div style={{ fontSize: '0.8rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>Total Clicks</div>
                   </div>
                 </div>
-                
+
                 <h4 style={{ fontSize: '0.9rem', marginBottom: '0.5rem', color: '#94a3b8' }}>Recent Activity</h4>
                 <div style={{ maxHeight: '150px', overflowY: 'auto', background: 'rgba(0,0,0,0.2)', padding: '0.5rem', borderRadius: '0.5rem' }}>
                   {stats.clicks.length === 0 ? (
